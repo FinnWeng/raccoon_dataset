@@ -18,10 +18,13 @@ class CSVToTFExampleTest(tf.test.TestCase):
         save_path = os.path.join(self.get_temp_dir(), image_file_name)
         image = PIL.Image.fromarray(image_data, 'RGB')
         image.save(save_path)
+#         這裡似乎是轉化檔案成某種格式
 
         column_names = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
         raccoon_data = [('tmp_raccoon_image.jpg', 256, 256, 'raccoon', 64, 64, 192, 192)]
+#         這一行替圖片上class
         raccoon_df = pd.DataFrame(raccoon_data, columns=column_names)
+#     做成表格
 
         grouped = generate_tfrecord.split(raccoon_df, 'filename')
         for group in grouped:
